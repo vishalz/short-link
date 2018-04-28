@@ -1,22 +1,16 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Meteor }                from 'meteor/meteor';
+import { Tracker}                from 'meteor/tracker';
+import React                     from 'react';
+import ReactDOM                  from 'react-dom';
+import { routes , redirectUser } from './../imports/routes/routes';
 
-import './main.html';
+import './../imports/startup/simple-schema-config';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
+Tracker.autorun(()=>{
+  const isLoggedIn = Meteor.userId();
+  redirectUser(isLoggedIn);
+});//end of Tracker
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+Meteor.startup(()=>{
+  ReactDOM.render(routes,document.getElementById('app'));
+});//end of startup
