@@ -26,7 +26,6 @@ export default class AddLink extends React.Component{
   render(){
     return(
       <div>
-        <h1> This is AddLink Component</h1>
         <p>{ this.state.error ? this.state.error : undefined } </p>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input ref='url' type='text' placeholder='url'></input>
