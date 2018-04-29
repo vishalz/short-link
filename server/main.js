@@ -8,7 +8,6 @@ Meteor.startup(() => {
   WebApp.connectHandlers.use((req,res,next)=>{
     const _id = req.originalUrl.slice(1);
     const link = LinksDB.findOne({_id});
-    console.log(link);
     if(link){
       res.statusCode = 302;
       res.setHeader('Location',link.url);

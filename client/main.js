@@ -7,7 +7,7 @@ import { routes , redirectUser } from './../imports/routes/routes';
 import './../imports/startup/simple-schema-config';
 
 Tracker.autorun(()=>{
-  const isLoggedIn = Meteor.userId();
+  const isLoggedIn = !!Meteor.userId();
   redirectUser(isLoggedIn);
 });//end of Tracker
 
