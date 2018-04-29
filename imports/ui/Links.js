@@ -1,25 +1,18 @@
-import React      from 'react';
-import PropTypes  from 'prop-types';
-import { Meteor } from 'meteor/meteor';
-import LinksTitle from './LinksTitle';
-import LinksList  from './LinksList';
-import AddLink    from './AddLink';
+import React         from 'react';
+import PrivateHeader from './PrivateHeader';
+import LinksList     from './LinksList';
+import AddLink       from './AddLink';
 
 
-export default class Links extends React.Component{
-  render(){
-    return(
-      <div>
-        <h1>Your Links</h1>
-        <LinksTitle title='Your Links'/>
-        <LinksList/>
-        <AddLink/>
-        <button onClick={()=>Meteor.logout()}>Log Out</button>
-      </div>
-    );
-  };
+
+const Links = ()=>{
+  return(
+    <div>
+      <PrivateHeader title='Your Links Below'/>
+      <LinksList/>
+      <AddLink/>
+    </div>
+  );
 };//end of Links
 
-Links.propTypes = {
-
-};
+export default Links;
