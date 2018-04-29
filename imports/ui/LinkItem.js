@@ -17,9 +17,9 @@ export default class LinkItem extends React.Component{
     this.clipboard.on('success',()=>{
       this.setState({justCopied: true});
       console.log('clipboard successs');
-      setTimeout(()=>{
+      setTimeout(function(){
        this.setState({justCopied: false}); 
-      },3000);
+      }.bind(this),3000);
     }).on('error',()=>{
       console.log('clipboard error');
     });
