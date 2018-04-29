@@ -6,7 +6,8 @@ export default class LinkItem extends React.Component{
   render(){
     return(
       <div>
-        <p>{ Meteor.absoluteUrl(this.props._id)}</p>
+        <p>{this.props.url}</p>
+        <p>{this.props.shortUrl}</p>
         <button>Hide</button>
         <button>Copy</button>
       </div>
@@ -15,8 +16,9 @@ export default class LinkItem extends React.Component{
 };//end of LinkItem
 
 LinkItem.propTypes = {
-  _id    : PropTypes.string.isRequired,
-  url    : PropTypes.string.isRequired,
-  userId : PropTypes.string.isRequired,
+  _id      : PropTypes.string.isRequired,
+  url      : PropTypes.string.isRequired,
+  userId   : PropTypes.string.isRequired,
+  shortUrl : PropTypes.string.isRequired,
 
 };
