@@ -6,30 +6,41 @@ export default class AddLink extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      error: ''
+      error: '',
+      url: ''
     };
   };//end of constructor
 
   handleSubmit(e){
     e.preventDefault();
-    const url = this.refs.url.value.trim();
+    const url = this.state.url.trim();
     Meteor.call('links.insert',url,(err)=>{
       if(err){
         this.setState({error: err.reason});
       } else{
         this.setState({error: ''});
-        this.refs.url.value = '';
+        this.setState({url: ''});
       }
     });//end of call
   };//end of handleSubmit
+
+  onChange(e){
+    const url = e.target.value;
+    this.setState({url});
+  };//end of onChanged
 
   render(){
     return(
       <div>
         <p>{ this.state.error ? this.state.error : undefined } </p>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input ref='url' type='text' placeholder='url'></input>
-          <button>Add Link</button>
+          <input 
+            type='text' 
+            onChange={this.onChange.bind(this)} 
+            value={this.state.url}
+            placeholder='url'>
+          </input>
+          <button >Add Link</button>
         </form>
       </div>
     );
