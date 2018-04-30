@@ -12,5 +12,6 @@ Tracker.autorun(()=>{
 });//end of Tracker
 
 Meteor.startup(()=>{
+  Session.set('showHidden', false);
   ReactDOM.render(routes,document.getElementById('app'));
 });//end of startup
