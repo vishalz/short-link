@@ -17,8 +17,9 @@ export default class LinksList extends React.Component{
   componentDidMount(){
     this.tracker = Tracker.autorun(()=>{
       Meteor.subscribe('links');
+      const visible = !Session.get('showHidden');
       this.setState({
-        links: LinksDB.find().fetch()
+        links: LinksDB.find({visible}).fetch()
       });
     });//end of tracker
   };//end of componentDidMount
