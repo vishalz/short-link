@@ -2,6 +2,7 @@ import React      from 'react';
 import PropTypes  from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import Clipboard  from 'clipboard';
+import moment     from 'moment';
 
 
 
@@ -31,13 +32,28 @@ export default class LinkItem extends React.Component{
     this.clipboard.destroy();
   };
 
+  renderAnalytics(){
+    const visitMessage = this.props.visitedCount === 1 ? 'visit' : 'visits';
+    let  visitedAtMessage ;
+    if(typeof this.props.lastVisitedAt === 'number'){
+       visitedAtMessage= ` - ( ${moment(this.props.lastVisitedAt).fromNow()})`;
+    } 
+
+    return(
+      <div>
+        <p>{this.props.visitedCount} {visitMessage} {visitedAtMessage}</p>
+      </div>
+    );
+  };//end of renderAnalytics
+
+
   render(){
     return(
       <div>
         <p>{this.props.url}</p>
         <p>{this.props.shortUrl}</p>
         <p>{this.props.visible.toString()}</p>
-        <p>{this.props.visitedCount} - {this.props.lastVisitedAt}</p>
+        {this.renderAnalytics()}
         <button ref='copy' data-clipboard-text={this.props.shortUrl}>
           { this.state.justCopied ? 'Copied' : 'Copy' }
         </button>
