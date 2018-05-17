@@ -1,5 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React       from 'react';
+import PropTypes   from 'prop-types';
+import Modal       from 'react-modal';
 import { LinksDB } from './../api/LinksDB';
 
 export default class AddLink extends React.Component{
@@ -7,7 +8,8 @@ export default class AddLink extends React.Component{
     super(props);
     this.state = {
       error: '',
-      url: ''
+      url: '',
+      isOpen: false
     };
   };//end of constructor
 
@@ -19,7 +21,7 @@ export default class AddLink extends React.Component{
         this.setState({error: err.reason});
       } else{
         this.setState({error: ''});
-        this.setState({url: ''});
+        this.setState({url: '', isOpen: false});
       }
     });//end of call
   };//end of handleSubmit
@@ -32,16 +34,20 @@ export default class AddLink extends React.Component{
   render(){
     return(
       <div>
-        <p>{ this.state.error ? this.state.error : undefined } </p>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <input 
-            type='text' 
-            onChange={this.onChange.bind(this)} 
-            value={this.state.url}
-            placeholder='url'>
-          </input>
-          <button >Add Link</button>
-        </form>
+        <button onClick={()=>this.setState( {isOpen: true} ) }> + Add Link </button>
+        <Modal isOpen={this.state.isOpen} contentLabel='Add Link'> 
+          <p>{ this.state.error ? this.state.error : undefined } </p>
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <input 
+              type='text' 
+              onChange={this.onChange.bind(this)} 
+              value={this.state.url}
+              placeholder='url'>
+            </input>
+            <button >Add Link</button>
+          </form>
+          <button onClick={()=> this.setState({isOpen: false, url: ''})}>Cancel</button>
+        </Modal>
       </div>
     );
   };

@@ -11,8 +11,8 @@ const Links = ()=>{
     <div>
       <PrivateHeader title='Your Links Below'/>
       <LinksFilter/>
-      <LinksList/>
       <AddLink/>
+      <LinksList/>
     </div>
   );
 };//end of Links
