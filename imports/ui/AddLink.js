@@ -1,5 +1,4 @@
 import React       from 'react';
-import PropTypes   from 'prop-types';
 import Modal       from 'react-modal';
 import { LinksDB } from './../api/LinksDB';
 
@@ -20,8 +19,11 @@ export default class AddLink extends React.Component{
       if(err){
         this.setState({error: err.reason});
       } else{
-        this.setState({error: ''});
-        this.setState({url: '', isOpen: false});
+        this.setState({
+          error: '', 
+          url: '', 
+          isOpen: false
+        });
       }
     });//end of call
   };//end of handleSubmit
@@ -53,6 +55,3 @@ export default class AddLink extends React.Component{
   };
 };//end of AddLink
 
-AddLink.propTypes = {
-
-};
